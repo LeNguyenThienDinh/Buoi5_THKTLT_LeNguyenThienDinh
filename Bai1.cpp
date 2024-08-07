@@ -38,6 +38,16 @@ bool binarySearch(int a[], int x, int left, int right)
 	}
 }
 
+int maxEven(int a[], int n) 
+{
+	if (n <= 0) 
+	{
+		return INT_MIN;
+	}
+	int currentMax = (a[n - 1] % 2 == 0) ? a[n - 1] : INT_MIN;
+	int maxInRest = maxEven(a, n - 1);
+	return (currentMax > maxInRest) ? currentMax : maxInRest;
+}
 
 //======================Xu ly main======================
 
@@ -49,7 +59,8 @@ int main()
 	int chon;
 	printf("Moi nhap chuc nang \n");
 	printf("1. Tinh tong chan cua a: \n");
-	printf("2. Tim x tren a dua vao tim kiem nhi phan theo de quy");
+	printf("2. Tim x tren a dua vao tim kiem nhi phan theo de quy \n");
+	printf("3. Tim max chan trong a \n");
 	scanf("%d", &chon);
 
 	switch (chon)
@@ -64,6 +75,18 @@ int main()
 			  scanf("%d", &x);
 			  bool found = binarySearch(arr, x, 0, size - 1);
 			  printf("so %d %s tim thay trong mang.\n", x, found ? "duoc" : "khong duoc");
+	}
+		break;
+	case 3:
+	{
+			  int max = maxEven(arr, size);
+			  if (max == INT_MIN) 
+			  {
+				  printf("No even numbers in the array.\n");
+			  }
+			  else {
+				  printf("Max even number: %d\n", max);
+			  }
 	}
 		break;
 	
